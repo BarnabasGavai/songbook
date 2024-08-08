@@ -2,17 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbookapp/Screens/DownloadScreen.dart';
 import 'package:songbookapp/logic/Firestore_Service.dart';
+import 'package:songbookapp/logic/SearchProvider.dart';
 import 'package:songbookapp/logic/connectivity_service.dart';
 
 import 'package:songbookapp/logic/model_theme.dart';
+import 'package:songbookapp/logic/autocomplete_service.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer3<ModelTheme, ConnectivityService, FirestoreService>(builder:
-        (context, themeNotifier, internetNotifier, dataNotifier, child) {
+    return Consumer4<ModelTheme, ConnectivityService, FirestoreService,
+            AutoCOmpleteState>(
+        builder: (context, themeNotifier, internetNotifier, dataNotifier,
+            AutocompleteNotifier, child) {
       if (internetNotifier.isConnected) {
         return GestureDetector(
           onTap: () {
@@ -35,6 +39,7 @@ class Home extends StatelessWidget {
                 ),
                 IconButton(
                     onPressed: () {
+                      FocusManager.instance.primaryFocus?.unfocus();
                       Navigator.pushNamed(context, "/downloads");
                     },
                     icon: const Icon(Icons.download_for_offline)),
@@ -68,18 +73,95 @@ class Home extends StatelessWidget {
                     const SizedBox(
                       height: 40,
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: SearchBar(
-                        trailing: [Icon(Icons.search)],
-                        padding: WidgetStatePropertyAll(
-                            EdgeInsets.symmetric(horizontal: 20)),
-                        hintText: "Search the song here",
-                        backgroundColor:
-                            WidgetStatePropertyAll(Colors.transparent),
-                        shadowColor: WidgetStatePropertyAll(Colors.transparent),
-                        side: WidgetStatePropertyAll(
-                            BorderSide(color: Colors.grey)),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      child: Autocomplete<String>(
+                        optionsBuilder:
+                            (TextEditingValue textEditingValue) async {
+                          if (textEditingValue.text.isEmpty) {
+                            return const Iterable<String>.empty();
+                          }
+                          final suggestions = await Provider.of<SearchProvider>(
+                                  context,
+                                  listen: false)
+                              .getSuggestions(textEditingValue.text);
+                          return suggestions;
+                        },
+                        onSelected: (String selectedValue) {
+                          final selectedItem = Provider.of<SearchProvider>(
+                                  context,
+                                  listen: false)
+                              .firestoreService
+                              .data
+                              .firstWhere(
+                                  (item) => item['title'] == selectedValue);
+                          FocusManager.instance.primaryFocus?.unfocus();
+
+                          Navigator.pushNamed(context, '/lyrics',
+                              arguments: selectedItem);
+                        },
+                        fieldViewBuilder: (context, controller, focusNode,
+                            onEditingComplete) {
+                          controller.addListener(() {
+                            AutocompleteNotifier.setText(controller.text);
+                          });
+                          return TextField(
+                            controller: controller,
+                            focusNode: focusNode,
+                            onEditingComplete: onEditingComplete,
+                            decoration: InputDecoration(
+                              suffixIcon: (AutocompleteNotifier.text.isNotEmpty)
+                                  ? IconButton(
+                                      onPressed: () {
+                                        controller.clear();
+                                        AutocompleteNotifier.clearText();
+                                        // Optionally, dismiss the autocomplete suggestions
+                                        FocusScope.of(context).unfocus();
+                                      },
+                                      icon: const Icon(Icons.clear),
+                                    )
+                                  : const Icon(Icons.search),
+                              hintText: 'Search the song here',
+                              border: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25))),
+                              filled: true,
+                              fillColor: Colors.transparent,
+                              focusedBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25))),
+                              enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.grey),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25))),
+                            ),
+                          );
+                        },
+                        optionsViewBuilder: (context, onSelected, options) {
+                          return Align(
+                            alignment: Alignment.topLeft,
+                            child: Material(
+                              elevation: 4.0,
+                              child: Container(
+                                width: MediaQuery.of(context).size.width,
+                                child: ListView(
+                                  padding: EdgeInsets.zero,
+                                  shrinkWrap: true,
+                                  children:
+                                      options.map<Widget>((String option) {
+                                    return ListTile(
+                                      title: Text(option),
+                                      onTap: () {
+                                        onSelected(option);
+                                      },
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(
@@ -97,6 +179,7 @@ class Home extends StatelessWidget {
                               const BorderRadius.all(Radius.circular(15))),
                       child: InkWell(
                         onTap: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
                           Navigator.pushNamed(context, '/list');
                         },
                         child: const Center(
