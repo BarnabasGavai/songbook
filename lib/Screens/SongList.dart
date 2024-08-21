@@ -90,8 +90,10 @@ class SongListScreen extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Navigator.pushNamed(context, '/lyrics',
-                            arguments: data[index]);
+                        Navigator.pushNamed(context, '/lyrics', arguments: {
+                          "fromdownloads": false,
+                          "mysong": data[index]
+                        });
                       });
                 },
               ),

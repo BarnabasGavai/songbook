@@ -97,8 +97,10 @@ class Home extends StatelessWidget {
                                   (item) => item['title'] == selectedValue);
                           FocusManager.instance.primaryFocus?.unfocus();
 
-                          Navigator.pushNamed(context, '/lyrics',
-                              arguments: selectedItem);
+                          Navigator.pushNamed(context, '/lyrics', arguments: {
+                            "fromdownloads": false,
+                            "mysong": selectedItem
+                          });
                         },
                         fieldViewBuilder: (context, controller, focusNode,
                             onEditingComplete) {

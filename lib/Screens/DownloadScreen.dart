@@ -29,7 +29,7 @@ class DownloadScreen extends StatelessWidget {
                       ? themeNotifier.isDark = false
                       : themeNotifier.isDark = true;
                 }),
-            SizedBox(
+            const SizedBox(
               width: 20,
             )
           ],
@@ -47,15 +47,15 @@ class DownloadScreen extends StatelessWidget {
                   return InkWell(
                       child: Container(
                         height: 60,
-                        padding: EdgeInsets.fromLTRB(17, 10, 17, 10),
+                        padding: const EdgeInsets.fromLTRB(17, 10, 17, 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Icon(Icons.music_note),
-                                SizedBox(
+                                const Icon(Icons.music_note),
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 Text(
@@ -63,7 +63,7 @@ class DownloadScreen extends StatelessWidget {
                                       ? "${myData[index]['title']}"
                                           .substring(0, 13)
                                       : "${myData[index]['title']}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                 )
@@ -71,12 +71,12 @@ class DownloadScreen extends StatelessWidget {
                             ),
                             Row(
                               children: [
-                                Icon(Icons.done),
-                                SizedBox(
+                                const Icon(Icons.done),
+                                const SizedBox(
                                   width: 9,
                                 ),
                                 IconButton(
-                                  icon: Icon(Icons.delete),
+                                  icon: const Icon(Icons.delete),
                                   onPressed: () async {
                                     await dataNotifier
                                         .deleteItem(myData[index]['maintitle']);
@@ -88,8 +88,10 @@ class DownloadScreen extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
-                        Navigator.pushNamed(context, '/lyrics',
-                            arguments: myData[index]);
+                        Navigator.pushNamed(context, '/lyrics', arguments: {
+                          "fromdownloads": true,
+                          "mysong": myData[index]
+                        });
                       });
                 },
               ),

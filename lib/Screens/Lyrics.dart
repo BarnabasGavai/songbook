@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:pinch_scale/pinch_scale.dart';
 import 'package:provider/provider.dart';
+import 'package:songbookapp/logic/Hive_Service.dart';
 import 'package:songbookapp/logic/model_theme.dart';
 import 'package:flutter/services.dart';
 
 class LyricsScreen extends StatelessWidget {
   final baseTextSizeValue = 18.0;
   late final fontSize = ValueNotifier<double>(baseTextSizeValue);
-  LyricsScreen({super.key});
+  Map<dynamic, dynamic> mysong;
+  bool fromdownloads;
+  LyricsScreen({super.key, required this.mysong, required this.fromdownloads});
   void copyToClipboard(String text) {
     Clipboard.setData(ClipboardData(text: text)).then((_) {
       print('Song copied to clipboard');
@@ -16,9 +19,8 @@ class LyricsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Map<dynamic, dynamic> args =
-        ModalRoute.of(context)!.settings.arguments as Map<dynamic, dynamic>;
-    return Consumer<ModelTheme>(builder: (context, themeNotifier, child) {
+    return Consumer2<ModelTheme, HiveService>(
+        builder: (context, themeNotifier, localNotifier, child) {
       return Scaffold(
         appBar: AppBar(
           actions: [
@@ -32,9 +34,17 @@ class LyricsScreen extends StatelessWidget {
                       : themeNotifier.isDark = true;
                 }),
             const SizedBox(
-              width: 20,
+              width: 15,
             ),
-            const Icon(Icons.download_for_offline_rounded),
+            (fromdownloads || localNotifier.doesItExist(mysong['maintitle']))
+                ? SizedBox(
+                    width: 0,
+                  )
+                : IconButton(
+                    onPressed: () async {
+                      await localNotifier.putItem(mysong['maintitle'], mysong);
+                    },
+                    icon: Icon(Icons.download)),
             const SizedBox(
               width: 15,
             )
@@ -57,7 +67,7 @@ class LyricsScreen extends StatelessWidget {
                     children: [
                       Center(
                         child: Text(
-                          "${args['title']}",
+                          "${mysong['title']}",
                           style: TextStyle(
                               fontSize: 23, fontWeight: FontWeight.bold),
                         ),
@@ -66,7 +76,7 @@ class LyricsScreen extends StatelessWidget {
                         height: 30,
                       ),
                       Text(
-                        """${args['song']}""",
+                        """${mysong['song']}""",
                         style: TextStyle(
                             fontSize: fontSize, fontWeight: FontWeight.w500),
                       ),
@@ -79,7 +89,7 @@ class LyricsScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            copyToClipboard(args['song']);
+            copyToClipboard(mysong['song']);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text('Text copied to clipboard')),
             );

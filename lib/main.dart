@@ -12,11 +12,8 @@ import 'package:songbookapp/logic/Hive_Service.dart';
 import 'package:songbookapp/logic/SearchProvider.dart';
 import 'package:songbookapp/logic/connectivity_service.dart';
 import 'package:songbookapp/logic/model_theme.dart';
-import 'package:songbookapp/Screens/DownloadScreen.dart';
-import 'package:songbookapp/Screens/HomePage.dart';
-import 'package:songbookapp/Screens/Lyrics.dart';
-import 'package:songbookapp/Screens/SongList.dart';
 import 'package:songbookapp/logic/autocomplete_service.dart';
+import 'package:songbookapp/router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,13 +47,14 @@ void main() async {
         ),
         ChangeNotifierProvider(create: (_) => AutoCOmpleteState())
       ],
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  AppRoute _appRoute = AppRoute();
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -93,35 +91,7 @@ class MyApp extends StatelessWidget {
               floatingActionButtonTheme: const FloatingActionButtonThemeData(
                   backgroundColor: Color(0xfffef7ff),
                   foregroundColor: Color(0xff141118))),
-      routes: {
-        '/': (context) => const Home(),
-        '/list': (context) => const SongListScreen(),
-        '/lyrics': (context) => LyricsScreen(),
-        '/downloads': (context) => const DownloadScreen(),
-      },
+      onGenerateRoute: _appRoute.onGenerateRoute,
     );
   }
 }
-
-// class ConnectivityChecker extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     final connectivityService =
-//         Provider.of<ConnectivityService>(context, listen: false);
-
-//     return FutureBuilder<void>(
-//       future: connectivityService.initialization,
-//       builder: (context, snapshot) {
-//         if (snapshot.connectionState == ConnectionState.waiting) {
-//           return Scaffold(
-//             body: Center(child: CircularProgressIndicator()),
-//           );
-//         } else if (snapshot.hasError || !connectivityService.isConnected) {
-//           return DownloadScreen(); // Show fallback screen when offline
-//         } else {
-//           return Home(); // Main screen when online
-//         }
-//       },
-//     );
-//   }
-// }
