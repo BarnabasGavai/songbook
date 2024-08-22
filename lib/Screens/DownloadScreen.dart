@@ -90,7 +90,8 @@ class DownloadScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.pushNamed(context, '/lyrics', arguments: {
                           "fromdownloads": true,
-                          "mysong": myData[index]
+                          "mysong": myData[index],
+                          'youtube': false
                         });
                       });
                 },

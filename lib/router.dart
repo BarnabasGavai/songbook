@@ -18,6 +18,7 @@ class AppRoute {
             builder: (context) => LyricsScreen(
                   fromdownloads: args['fromdownloads'],
                   mysong: args['mysong'],
+                  youtube: args['youtube'],
                 ));
       case '/downloads':
         return MaterialPageRoute(builder: (context) => DownloadScreen());

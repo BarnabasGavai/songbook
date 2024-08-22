@@ -16,7 +16,8 @@ class FirestoreService extends ChangeNotifier {
             'title': myresdata["title"],
             "song": "${myresdata["song"]}".replaceAll(r'\n', """
 
-""")
+"""),
+            "youtube": "${myresdata['youtube']}"
           };
           return myMap;
         }).toList();
@@ -38,5 +39,10 @@ class FirestoreService extends ChangeNotifier {
         .map((item) => item['title'] as String)
         .toList();
     return results;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

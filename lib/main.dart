@@ -13,6 +13,7 @@ import 'package:songbookapp/logic/SearchProvider.dart';
 import 'package:songbookapp/logic/connectivity_service.dart';
 import 'package:songbookapp/logic/model_theme.dart';
 import 'package:songbookapp/logic/autocomplete_service.dart';
+import 'package:songbookapp/logic/youtubePlayer.dart';
 import 'package:songbookapp/router.dart';
 
 void main() async {
@@ -32,6 +33,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => YoutubePlayerProvider()),
         ChangeNotifierProvider(
             create: (_) => HiveService(mybox: mybox), lazy: false),
         ChangeNotifierProvider(

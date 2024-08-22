@@ -90,9 +90,17 @@ class SongListScreen extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
+                        if (data[index].containsKey('youtube')) {
+                          Navigator.pushNamed(context, '/lyrics', arguments: {
+                            "fromdownloads": false,
+                            "mysong": data[index],
+                            'youtube': true
+                          });
+                        }
                         Navigator.pushNamed(context, '/lyrics', arguments: {
                           "fromdownloads": false,
-                          "mysong": data[index]
+                          "mysong": data[index],
+                          'youtube': false
                         });
                       });
                 },

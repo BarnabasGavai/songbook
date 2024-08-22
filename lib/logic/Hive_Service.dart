@@ -45,4 +45,10 @@ class HiveService extends ChangeNotifier {
       return e.value as Map<dynamic, dynamic>;
     }).toList();
   }
+
+  @override
+  void dispose() {
+    _box?.close();
+    super.dispose();
+  }
 }
