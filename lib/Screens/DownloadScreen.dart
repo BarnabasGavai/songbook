@@ -34,7 +34,7 @@ class DownloadScreen extends StatelessWidget {
             )
           ],
         ),
-        body: (myData.length < 1)
+        body: (myData.isEmpty)
             ? const Center(
                 child: Text(
                   "NO SONGS",

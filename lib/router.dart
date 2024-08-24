@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:songbookapp/Screens/DownloadScreen.dart';
 import 'package:songbookapp/Screens/HomePage.dart';
 import 'package:songbookapp/Screens/Lyrics.dart';
@@ -8,12 +9,13 @@ class AppRoute {
   Route? onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (context) => Home());
+        return MaterialPageRoute(builder: (context) => const Home());
 
       case '/list':
-        return MaterialPageRoute(builder: (context) => SongListScreen());
+        return MaterialPageRoute(builder: (context) => const SongListScreen());
       case '/lyrics':
         final args = settings.arguments as Map<String, dynamic>;
+
         return MaterialPageRoute(
             builder: (context) => LyricsScreen(
                   fromdownloads: args['fromdownloads'],
@@ -21,7 +23,7 @@ class AppRoute {
                   youtube: args['youtube'],
                 ));
       case '/downloads':
-        return MaterialPageRoute(builder: (context) => DownloadScreen());
+        return MaterialPageRoute(builder: (context) => const DownloadScreen());
       default:
         return null;
     }

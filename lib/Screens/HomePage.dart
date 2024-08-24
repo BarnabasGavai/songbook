@@ -100,7 +100,7 @@ class Home extends StatelessWidget {
                           Navigator.pushNamed(context, '/lyrics', arguments: {
                             "fromdownloads": false,
                             "mysong": selectedItem,
-                            "youtube": (selectedItem.containsKey('youtube'))
+                            "youtube": (selectedItem['hasYoutube'])
                           });
                         },
                         fieldViewBuilder: (context, controller, focusNode,

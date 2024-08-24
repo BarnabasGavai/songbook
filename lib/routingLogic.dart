@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:songbookapp/Screens/DownloadScreen.dart';
-import 'package:songbookapp/Screens/HomePage.dart';
+
 import 'package:songbookapp/logic/connectivity_service.dart';
 
 class MyRouting extends StatelessWidget {
@@ -11,7 +10,7 @@ class MyRouting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<ConnectivityService>(
         builder: (context, internetNotifier, child) {
-      return Scaffold(
+      return const Scaffold(
         body: Center(
           child: CircularProgressIndicator(),
         ),

@@ -27,21 +27,21 @@ class SongListScreen extends StatelessWidget {
                       ? themeNotifier.isDark = false
                       : themeNotifier.isDark = true;
                 }),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             IconButton(
               onPressed: () {
                 Navigator.pushNamed(context, "/downloads");
               },
-              icon: Icon(Icons.download_for_offline_rounded),
+              icon: const Icon(Icons.download_for_offline_rounded),
             ),
-            SizedBox(
+            const SizedBox(
               width: 15,
             )
           ],
         ),
-        body: (data.length < 1)
+        body: (data.isEmpty)
             ? const Center(
                 child: Text(
                   "NO SONGS",
@@ -54,15 +54,15 @@ class SongListScreen extends StatelessWidget {
                   return InkWell(
                       child: Container(
                         height: 60,
-                        padding: EdgeInsets.fromLTRB(17, 10, 17, 10),
+                        padding: const EdgeInsets.fromLTRB(17, 10, 17, 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Icon(Icons.music_note),
-                                SizedBox(
+                                const Icon(Icons.music_note),
+                                const SizedBox(
                                   width: 20,
                                 ),
                                 Text(
@@ -70,7 +70,7 @@ class SongListScreen extends StatelessWidget {
                                       ? "${data[index]['title']}"
                                           .substring(0, 13)
                                       : "${data[index]['title']}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                 )
@@ -78,30 +78,31 @@ class SongListScreen extends StatelessWidget {
                             ),
                             (localNotifier
                                     .doesItExist(data[index]['maintitle']))
-                                ? Icon(Icons.done)
+                                ? const Icon(Icons.done)
                                 : IconButton(
                                     onPressed: () async {
                                       await localNotifier.putItem(
                                           data[index]['maintitle'],
                                           data[index]);
                                     },
-                                    icon: Icon(Icons.download))
+                                    icon: const Icon(Icons.download))
                           ],
                         ),
                       ),
                       onTap: () {
-                        if (data[index].containsKey('youtube')) {
+                        if (data[index]['hasYoutube']) {
                           Navigator.pushNamed(context, '/lyrics', arguments: {
                             "fromdownloads": false,
                             "mysong": data[index],
                             'youtube': true
                           });
+                        } else {
+                          Navigator.pushNamed(context, '/lyrics', arguments: {
+                            "fromdownloads": false,
+                            "mysong": data[index],
+                            'youtube': false
+                          });
                         }
-                        Navigator.pushNamed(context, '/lyrics', arguments: {
-                          "fromdownloads": false,
-                          "mysong": data[index],
-                          'youtube': false
-                        });
                       });
                 },
               ),

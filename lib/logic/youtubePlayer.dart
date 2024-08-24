@@ -8,6 +8,7 @@ class YoutubePlayerProvider with ChangeNotifier {
   Duration _position = Duration.zero;
   Duration _duration = Duration.zero;
   bool _loading = false;
+  bool _ended = false;
 
   YoutubePlayerController get controller => _controller;
   bool get isControllerReady => _isControllerReady;
@@ -15,11 +16,14 @@ class YoutubePlayerProvider with ChangeNotifier {
   Duration get position => _position;
   Duration get duration => _duration;
   bool get loading => _loading;
+  bool get ended => _ended;
 
   void initialize(String videoUrl) {
-    _loading = true;
+    setLoading(true);
+    _isControllerReady = true;
+
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(videoUrl)!,
+      initialVideoId: YoutubePlayer.convertUrlToId("${videoUrl}")!,
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,
@@ -27,12 +31,18 @@ class YoutubePlayerProvider with ChangeNotifier {
         enableCaption: false,
       ),
     )..addListener(_controllerListener);
-    Future.delayed(const Duration(seconds: 5), () {
-      _isControllerReady = true;
-      _loading = false;
+    play();
+    Future.delayed(const Duration(seconds: 1), pause);
 
-      notifyListeners();
-    });
+    notifyListeners();
+  }
+
+  void setEndedFalse() {
+    if (_isControllerReady) {
+      if (isPlaying) {
+        _ended = false;
+      }
+    }
   }
 
   void _controllerListener() {
@@ -40,8 +50,18 @@ class YoutubePlayerProvider with ChangeNotifier {
       _isPlaying = _controller.value.isPlaying;
       _position = _controller.value.position;
       _duration = _controller.metadata.duration;
+      if ((_position.inSeconds >= _duration.inSeconds - 1) &&
+          _duration != Duration.zero) {
+        pause();
+        _ended = true;
+      }
       notifyListeners();
     }
+  }
+
+  void setLoading(bool mybool) {
+    _loading = mybool;
+    notifyListeners();
   }
 
   void play() {
@@ -60,15 +80,37 @@ class YoutubePlayerProvider with ChangeNotifier {
     }
   }
 
-  void stop() {
+  void setPosition(Duration myDuration) {
+    int mypos = _position.inSeconds;
+    int reqpos = myDuration.inSeconds;
+
+    bool isForward = reqpos > mypos;
+    if (isForward && (reqpos <= _duration.inSeconds)) {
+      _controller.seekTo(myDuration);
+    }
+    if (!isForward && (reqpos >= 0)) {
+      _controller.seekTo(myDuration);
+    }
+
+    notifyListeners();
+  }
+
+  void stop(bool fromwidget) {
     if (_isControllerReady) {
-      _controller.pause();
-      _isPlaying = false;
-      _isControllerReady = false;
-      _duration = Duration.zero;
-      _position = Duration.zero;
-      _controller.dispose();
-      notifyListeners();
+      if (fromwidget) {
+        _controller.pause();
+        _isPlaying = false;
+        _isControllerReady = false;
+        _duration = Duration.zero;
+        _position = Duration.zero;
+        notifyListeners();
+      } else {
+        _isPlaying = false;
+        _isControllerReady = false;
+        _duration = Duration.zero;
+        _position = Duration.zero;
+        _controller.dispose();
+      }
     }
   }
 

@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +54,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  AppRoute _appRoute = AppRoute();
+  final AppRoute _appRoute = AppRoute();
   MyApp({super.key});
 
   @override
