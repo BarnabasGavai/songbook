@@ -73,7 +73,8 @@ class Home extends StatelessWidget {
                     const SizedBox(
                       height: 40,
                     ),
-                    Padding(
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.6,
                       padding: const EdgeInsets.symmetric(horizontal: 15),
                       child: Autocomplete<String>(
                         optionsBuilder:
@@ -147,7 +148,8 @@ class Home extends StatelessWidget {
                             child: Material(
                               elevation: 4.0,
                               child: Container(
-                                width: MediaQuery.of(context).size.width,
+                                width: MediaQuery.of(context).size.width * 0.6,
+                                height: 200,
                                 child: ListView(
                                   padding: EdgeInsets.zero,
                                   shrinkWrap: true,
@@ -172,6 +174,35 @@ class Home extends StatelessWidget {
                     ),
                     Container(
                       height: 40,
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      margin: EdgeInsets.symmetric(horizontal: 30),
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              color: (themeNotifier.isDark)
+                                  ? Colors.white
+                                  : Colors.black),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(15))),
+                      child: InkWell(
+                        onTap: () {
+                          FocusManager.instance.primaryFocus?.unfocus();
+                          Navigator.pushNamed(context, '/index');
+                        },
+                        child: const Center(
+                          child: Text(
+                            "Letter Index",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 16.4),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      height: 40,
+                      width: MediaQuery.of(context).size.width * 0.5,
                       margin: const EdgeInsets.symmetric(horizontal: 30),
                       decoration: BoxDecoration(
                           border: Border.all(
@@ -187,13 +218,14 @@ class Home extends StatelessWidget {
                         },
                         child: const Center(
                           child: Text(
-                            "Hindi Songs",
+                            "All Songs",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 16.4),
                           ),
                         ),
                       ),
-                    )
+                    ),
+                    SizedBox(height: 50)
                   ],
                 ),
               ),

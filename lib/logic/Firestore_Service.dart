@@ -5,9 +5,14 @@ class FirestoreService extends ChangeNotifier {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   late Stream<List<Map<String, dynamic>>> _dataStream;
   List<Map<String, dynamic>> _data = [];
+  Map<String, List<dynamic>> groupedItems = {};
 
   FirestoreService() {
-    _dataStream = _db.collection('hindi').snapshots().map(
+    _dataStream = _db
+        .collection('hindi')
+        .orderBy('title', descending: false)
+        .snapshots()
+        .map(
       (snapshot) {
         return snapshot.docs.map((doc) {
           final myresdata = doc.data();
@@ -28,6 +33,14 @@ class FirestoreService extends ChangeNotifier {
     );
 
     _dataStream.listen((data) {
+      for (var i = 0; i < data.length; i++) {
+        String firstletter = data[i]['title'][0];
+        if (!groupedItems.containsKey(firstletter)) {
+          groupedItems[firstletter] = [];
+        }
+
+        groupedItems[firstletter]?.add(data[i]);
+      }
       _data = data;
       notifyListeners();
     });
