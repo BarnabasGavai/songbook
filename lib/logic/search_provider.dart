@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'Firestore_Service.dart';
+import 'firestore_service.dart';
 
 class SearchProvider with ChangeNotifier {
   final FirestoreService _firestoreService;

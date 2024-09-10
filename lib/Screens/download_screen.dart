@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:songbookapp/logic/Firestore_Service.dart';
-import 'package:songbookapp/logic/Hive_Service.dart';
+import 'package:songbookapp/logic/hive_service_provider.dart';
 
 import 'package:songbookapp/logic/model_theme.dart';
 
-class SongListfromIndex extends StatelessWidget {
-  String letter;
-  SongListfromIndex({super.key, required this.letter});
+class DownloadScreen extends StatelessWidget {
+  const DownloadScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer3<ModelTheme, FirestoreService, HiveService>(
-        builder: (context, themeNotifier, dataNotifier, localNotifier, child) {
-      final data = dataNotifier.groupedItems[letter] ?? [];
-
+    return Consumer2<ModelTheme, HiveService>(
+        builder: (context, themeNotifier, dataNotifier, child) {
+      List<Map<dynamic, dynamic>> myData = dataNotifier.getAllItems();
       return Scaffold(
         appBar: AppBar(
+          title: const Text(
+            "Offline Downloads",
+            style: TextStyle(fontSize: 19, fontWeight: FontWeight.w500),
+          ),
           actions: [
             IconButton(
                 icon: Icon(themeNotifier.isDark
@@ -30,19 +31,10 @@ class SongListfromIndex extends StatelessWidget {
                 }),
             const SizedBox(
               width: 20,
-            ),
-            IconButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/downloads");
-              },
-              icon: const Icon(Icons.download_for_offline_rounded),
-            ),
-            const SizedBox(
-              width: 15,
             )
           ],
         ),
-        body: (data.isEmpty)
+        body: (myData.isEmpty)
             ? const Center(
                 child: Text(
                   "NO SONGS",
@@ -50,7 +42,7 @@ class SongListfromIndex extends StatelessWidget {
                 ),
               )
             : ListView.builder(
-                itemCount: data.length,
+                itemCount: myData.length,
                 itemBuilder: (context, index) {
                   return InkWell(
                       child: Container(
@@ -67,43 +59,32 @@ class SongListfromIndex extends StatelessWidget {
                                   width: 20,
                                 ),
                                 Text(
-                                  ("${data[index]['title']}".length > 30)
-                                      ? "${data[index]['title']}"
+                                  ("${myData[index]['title']}".length > 30)
+                                      ? "${myData[index]['title']}"
                                           .substring(0, 13)
-                                      : "${data[index]['title']}",
+                                      : "${myData[index]['title']}",
                                   style: const TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w500),
                                 )
                               ],
                             ),
-                            (localNotifier
-                                    .doesItExist(data[index]['maintitle']))
-                                ? const Icon(Icons.done)
-                                : IconButton(
-                                    onPressed: () async {
-                                      await localNotifier.putItem(
-                                          data[index]['maintitle'],
-                                          data[index]);
-                                    },
-                                    icon: const Icon(Icons.download))
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () async {
+                                await dataNotifier
+                                    .deleteItem(myData[index]['maintitle']);
+                              },
+                            )
                           ],
                         ),
                       ),
                       onTap: () {
-                        if (data[index]['hasYoutube']) {
-                          Navigator.pushNamed(context, '/lyrics', arguments: {
-                            "fromdownloads": false,
-                            "mysong": data[index],
-                            'youtube': true
-                          });
-                        } else {
-                          Navigator.pushNamed(context, '/lyrics', arguments: {
-                            "fromdownloads": false,
-                            "mysong": data[index],
-                            'youtube': false
-                          });
-                        }
+                        Navigator.pushNamed(context, '/lyrics', arguments: {
+                          "fromdownloads": true,
+                          "mysong": myData[index],
+                          'youtube': false
+                        });
                       });
                 },
               ),

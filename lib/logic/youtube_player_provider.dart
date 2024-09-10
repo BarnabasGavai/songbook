@@ -23,7 +23,7 @@ class YoutubePlayerProvider with ChangeNotifier {
     _isControllerReady = true;
 
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId("${videoUrl}")!,
+      initialVideoId: YoutubePlayer.convertUrlToId(videoUrl)!,
       flags: const YoutubePlayerFlags(
         autoPlay: false,
         mute: false,

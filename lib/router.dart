@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:songbookapp/Screens/DownloadScreen.dart';
-import 'package:songbookapp/Screens/HomePage.dart';
+import 'package:songbookapp/Screens/download_screen.dart';
+import 'package:songbookapp/Screens/home_page.dart';
 import 'package:songbookapp/Screens/Lyrics.dart';
-import 'package:songbookapp/Screens/SongList.dart';
-import 'package:songbookapp/Screens/indexScreen.dart';
-import 'package:songbookapp/Screens/specialList.dart';
+import 'package:songbookapp/Screens/song_list.dart';
+import 'package:songbookapp/Screens/index_screen.dart';
+import 'package:songbookapp/Screens/special_list.dart';
 
 class AppRoute {
   Route? onGenerateRoute(RouteSettings settings) {

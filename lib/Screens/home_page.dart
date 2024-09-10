@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:songbookapp/Screens/DownloadScreen.dart';
-import 'package:songbookapp/Screens/SearchingScreen.dart';
-import 'package:songbookapp/logic/Firestore_Service.dart';
+import 'package:songbookapp/Screens/download_screen.dart';
+import 'package:songbookapp/Screens/searching_screen.dart';
+import 'package:songbookapp/logic/firestore_service.dart';
 
 import 'package:songbookapp/logic/connectivity_service.dart';
 
@@ -17,11 +17,11 @@ class Home extends StatelessWidget {
     return Consumer4<ModelTheme, ConnectivityService, FirestoreService,
             AutoCOmpleteState>(
         builder: (context, themeNotifier, internetNotifier, dataNotifier,
-            AutocompleteNotifier, child) {
+            autocompleteNotifier, child) {
       if (internetNotifier.isConnected) {
         return GestureDetector(
           onTap: () {
-            FocusScope.of(context).requestFocus(new FocusNode());
+            FocusScope.of(context).requestFocus(FocusNode());
           },
           child: Scaffold(
             appBar: AppBar(

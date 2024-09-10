@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:songbookapp/logic/Firestore_Service.dart';
-import 'package:songbookapp/logic/SearchProvider.dart';
+import 'package:songbookapp/logic/firestore_service.dart';
+import 'package:songbookapp/logic/search_provider.dart';
 import 'package:songbookapp/logic/autocomplete_service.dart';
 import 'package:songbookapp/logic/connectivity_service.dart';
 import 'package:songbookapp/logic/model_theme.dart';
@@ -14,7 +14,7 @@ class Searchingscreen extends StatelessWidget {
     return Consumer4<ModelTheme, ConnectivityService, FirestoreService,
             AutoCOmpleteState>(
         builder: (context, themeNotifier, internetNotifier, dataNotifier,
-            AutocompleteNotifier, child) {
+            autocompleteNotifier, child) {
       return Scaffold(
         appBar: AppBar(
           actions: [
@@ -75,7 +75,7 @@ class Searchingscreen extends StatelessWidget {
               fieldViewBuilder:
                   (context, controller, focusNode, onEditingComplete) {
                 controller.addListener(() {
-                  AutocompleteNotifier.setText(controller.text);
+                  autocompleteNotifier.setText(controller.text);
                 });
                 return TextField(
                   controller: controller,
@@ -83,11 +83,11 @@ class Searchingscreen extends StatelessWidget {
                   autofocus: true,
                   onEditingComplete: onEditingComplete,
                   decoration: InputDecoration(
-                    suffixIcon: (AutocompleteNotifier.text.isNotEmpty)
+                    suffixIcon: (autocompleteNotifier.text.isNotEmpty)
                         ? IconButton(
                             onPressed: () {
                               controller.clear();
-                              AutocompleteNotifier.clearText();
+                              autocompleteNotifier.clearText();
                               // Optionally, dismiss the autocomplete suggestions
                               FocusScope.of(context).unfocus();
                             },
@@ -117,13 +117,13 @@ class Searchingscreen extends StatelessWidget {
                 return Align(
                   alignment: Alignment.topLeft,
                   child: Container(
-                    margin: EdgeInsets.only(right: 45),
+                    margin: const EdgeInsets.only(right: 45),
                     decoration: BoxDecoration(
                         border: Border.all(
                             width: 0.7,
                             color: (themeNotifier.isDark)
-                                ? Color.fromARGB(255, 126, 126, 126)
-                                : Color.fromARGB(255, 195, 195, 195))),
+                                ? const Color.fromARGB(255, 126, 126, 126)
+                                : const Color.fromARGB(255, 195, 195, 195))),
                     child: ListView(
                       padding: EdgeInsets.zero,
                       shrinkWrap: true,
@@ -135,7 +135,7 @@ class Searchingscreen extends StatelessWidget {
                                   color: const Color.fromARGB(
                                       255, 152, 152, 152))),
                           child: ListTile(
-                            leading: Icon(Icons.music_note),
+                            leading: const Icon(Icons.music_note),
                             title: Text(option),
                             onTap: () {
                               onSelected(option);

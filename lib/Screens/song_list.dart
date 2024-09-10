@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:songbookapp/logic/Firestore_Service.dart';
-import 'package:songbookapp/logic/Hive_Service.dart';
+import 'package:songbookapp/logic/firestore_service.dart';
+import 'package:songbookapp/logic/hive_service_provider.dart';
 
 import 'package:songbookapp/logic/model_theme.dart';
 

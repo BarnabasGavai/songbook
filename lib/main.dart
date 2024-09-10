@@ -6,13 +6,13 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:songbookapp/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:songbookapp/logic/Firestore_Service.dart';
-import 'package:songbookapp/logic/Hive_Service.dart';
-import 'package:songbookapp/logic/SearchProvider.dart';
+import 'package:songbookapp/logic/firestore_service.dart';
+import 'package:songbookapp/logic/hive_service_provider.dart';
+import 'package:songbookapp/logic/search_provider.dart';
 import 'package:songbookapp/logic/connectivity_service.dart';
 import 'package:songbookapp/logic/model_theme.dart';
 import 'package:songbookapp/logic/autocomplete_service.dart';
-import 'package:songbookapp/logic/youtubePlayer.dart';
+import 'package:songbookapp/logic/youtube_player_provider.dart';
 import 'package:songbookapp/router.dart';
 
 void main() async {

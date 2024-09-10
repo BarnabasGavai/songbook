@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:pinch_scale/pinch_scale.dart';
 import 'package:provider/provider.dart';
-import 'package:songbookapp/logic/Hive_Service.dart';
+import 'package:songbookapp/logic/hive_service_provider.dart';
 import 'package:songbookapp/logic/model_theme.dart';
 import 'package:flutter/services.dart';
-import 'package:songbookapp/logic/youtubePlayer.dart';
+import 'package:songbookapp/logic/youtube_player_provider.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class LyricsScreen extends StatelessWidget {
-  Map<dynamic, dynamic> mysong;
-  bool fromdownloads;
+  final Map<dynamic, dynamic> mysong;
+  final bool fromdownloads;
 
-  bool youtube;
+  final bool youtube;
   LyricsScreen(
       {super.key,
       required this.mysong,

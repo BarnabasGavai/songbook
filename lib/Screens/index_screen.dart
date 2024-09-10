@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:songbookapp/logic/Firestore_Service.dart';
-import 'package:songbookapp/logic/Hive_Service.dart';
+import 'package:songbookapp/logic/firestore_service.dart';
+import 'package:songbookapp/logic/hive_service_provider.dart';
 import 'package:songbookapp/logic/model_theme.dart';
 
 class Indexscreen extends StatelessWidget {
   Indexscreen({super.key});
-  List<String> hindiAlphabets = [
+  final List<String> hindiAlphabets = [
     // Vowels (Swar)
     "अ", "आ", "इ", "ई", "उ", "ऊ", "ऋ", "ए", "ऐ", "ओ", "औ",
 
