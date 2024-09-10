@@ -10,6 +10,7 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 class LyricsScreen extends StatelessWidget {
   Map<dynamic, dynamic> mysong;
   bool fromdownloads;
+
   bool youtube;
   LyricsScreen(
       {super.key,

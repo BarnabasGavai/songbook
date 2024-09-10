@@ -69,20 +69,12 @@ class DownloadScreen extends StatelessWidget {
                                 )
                               ],
                             ),
-                            Row(
-                              children: [
-                                const Icon(Icons.done),
-                                const SizedBox(
-                                  width: 9,
-                                ),
-                                IconButton(
-                                  icon: const Icon(Icons.delete),
-                                  onPressed: () async {
-                                    await dataNotifier
-                                        .deleteItem(myData[index]['maintitle']);
-                                  },
-                                )
-                              ],
+                            IconButton(
+                              icon: const Icon(Icons.delete),
+                              onPressed: () async {
+                                await dataNotifier
+                                    .deleteItem(myData[index]['maintitle']);
+                              },
                             )
                           ],
                         ),

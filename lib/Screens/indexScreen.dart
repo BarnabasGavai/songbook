@@ -21,9 +21,6 @@ class Indexscreen extends StatelessWidget {
 
     // Compound letters
     "क्ष", "त्र", "ज्ञ",
-
-    // Anuswar, Chandrabindu, Visarga
-    "ं", "ँ", "ः"
   ];
 
   @override
@@ -59,22 +56,23 @@ class Indexscreen extends StatelessWidget {
         body: Container(
           padding: const EdgeInsets.fromLTRB(17, 10, 17, 10),
           child: GridView.builder(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 100),
             itemCount: hindiAlphabets.length,
             itemBuilder: (context, index) => InkWell(
               onTap: () => Navigator.pushNamed(context, '/letterlist',
                   arguments: {"myLetter": hindiAlphabets[index]}),
               child: Container(
-                margin: EdgeInsets.all(6),
+                margin: const EdgeInsets.all(6),
                 height: 50,
                 color: (themeNotifier.isDark)
-                    ? Color(0xAA2C3335)
-                    : Color(0xAADAE0E2),
+                    ? const Color(0xAA2C3335)
+                    : const Color(0xAADAE0E2),
                 child: Center(
                   child: Text(
                     "${hindiAlphabets[index]}",
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w400),
+                    style: const TextStyle(
+                        fontSize: 25, fontWeight: FontWeight.w400),
                   ),
                 ),
               ),

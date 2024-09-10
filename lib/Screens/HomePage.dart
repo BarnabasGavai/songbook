@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:songbookapp/Screens/DownloadScreen.dart';
+import 'package:songbookapp/Screens/SearchingScreen.dart';
 import 'package:songbookapp/logic/Firestore_Service.dart';
-import 'package:songbookapp/logic/SearchProvider.dart';
+
 import 'package:songbookapp/logic/connectivity_service.dart';
 
 import 'package:songbookapp/logic/model_theme.dart';
@@ -57,7 +58,7 @@ class Home extends StatelessWidget {
                       "Praise the Lord!",
                       textAlign: TextAlign.center,
                       style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                          TextStyle(fontSize: 33, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
                       height: 30,
@@ -73,109 +74,47 @@ class Home extends StatelessWidget {
                     const SizedBox(
                       height: 40,
                     ),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.6,
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Autocomplete<String>(
-                        optionsBuilder:
-                            (TextEditingValue textEditingValue) async {
-                          if (textEditingValue.text.isEmpty) {
-                            return const Iterable<String>.empty();
-                          }
-                          final suggestions = await Provider.of<SearchProvider>(
-                                  context,
-                                  listen: false)
-                              .getSuggestions(textEditingValue.text);
-                          return suggestions;
-                        },
-                        onSelected: (String selectedValue) {
-                          final selectedItem = Provider.of<SearchProvider>(
-                                  context,
-                                  listen: false)
-                              .firestoreService
-                              .data
-                              .firstWhere(
-                                  (item) => item['title'] == selectedValue);
-                          FocusManager.instance.primaryFocus?.unfocus();
-
-                          Navigator.pushNamed(context, '/lyrics', arguments: {
-                            "fromdownloads": false,
-                            "mysong": selectedItem,
-                            "youtube": (selectedItem['hasYoutube'])
-                          });
-                        },
-                        fieldViewBuilder: (context, controller, focusNode,
-                            onEditingComplete) {
-                          controller.addListener(() {
-                            AutocompleteNotifier.setText(controller.text);
-                          });
-                          return TextField(
-                            controller: controller,
-                            focusNode: focusNode,
-                            onEditingComplete: onEditingComplete,
-                            decoration: InputDecoration(
-                              suffixIcon: (AutocompleteNotifier.text.isNotEmpty)
-                                  ? IconButton(
-                                      onPressed: () {
-                                        controller.clear();
-                                        AutocompleteNotifier.clearText();
-                                        // Optionally, dismiss the autocomplete suggestions
-                                        FocusScope.of(context).unfocus();
-                                      },
-                                      icon: const Icon(Icons.clear),
-                                    )
-                                  : const Icon(Icons.search),
-                              hintText: 'Search the song here',
-                              border: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25))),
-                              filled: true,
-                              fillColor: Colors.transparent,
-                              focusedBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25))),
-                              enabledBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.grey),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25))),
+                    GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        PageRouteBuilder(
+                          pageBuilder:
+                              (context, animation, secondaryAnimation) =>
+                                  const Searchingscreen(),
+                          transitionDuration: Duration.zero,
+                          reverseTransitionDuration: Duration.zero,
+                        ),
+                      ),
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: 45,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1,
+                              color: (themeNotifier.isDark)
+                                  ? Colors.white
+                                  : Colors.black,
                             ),
-                          );
-                        },
-                        optionsViewBuilder: (context, onSelected, options) {
-                          return Align(
-                            alignment: Alignment.topLeft,
-                            child: Material(
-                              elevation: 4.0,
-                              child: Container(
-                                width: MediaQuery.of(context).size.width * 0.6,
-                                height: 200,
-                                child: ListView(
-                                  padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
-                                  children:
-                                      options.map<Widget>((String option) {
-                                    return ListTile(
-                                      title: Text(option),
-                                      onTap: () {
-                                        onSelected(option);
-                                      },
-                                    );
-                                  }).toList(),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
+                            borderRadius: BorderRadius.circular(20)),
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: const Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text("Search the song here"),
+                              Icon(Icons.search)
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(
-                      height: 50,
+                      height: 40,
                     ),
                     Container(
                       height: 40,
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      margin: EdgeInsets.symmetric(horizontal: 30),
+                      width: MediaQuery.of(context).size.width * 0.75,
+                      margin: const EdgeInsets.symmetric(horizontal: 30),
                       decoration: BoxDecoration(
                           border: Border.all(
                               color: (themeNotifier.isDark)
@@ -197,12 +136,12 @@ class Home extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 50,
+                    const SizedBox(
+                      height: 40,
                     ),
                     Container(
                       height: 40,
-                      width: MediaQuery.of(context).size.width * 0.5,
+                      width: MediaQuery.of(context).size.width * 0.75,
                       margin: const EdgeInsets.symmetric(horizontal: 30),
                       decoration: BoxDecoration(
                           border: Border.all(
@@ -225,7 +164,7 @@ class Home extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 50)
+                    const SizedBox(height: 40)
                   ],
                 ),
               ),

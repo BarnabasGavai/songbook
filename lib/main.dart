@@ -66,6 +66,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: (modelTheme.isDark)
           ? ThemeData(
+              pageTransitionsTheme: const PageTransitionsTheme(
+                  builders: <TargetPlatform, PageTransitionsBuilder>{
+                    TargetPlatform.android: FadeUpwardsPageTransitionsBuilder()
+                  }),
+              textSelectionTheme:
+                  const TextSelectionThemeData(cursorColor: Color(0xfffef7ff)),
               brightness: Brightness.dark,
               appBarTheme: const AppBarTheme(
                   elevation: 0,
@@ -80,6 +86,12 @@ class MyApp extends StatelessWidget {
                 foregroundColor: Color(0xfffef7ff),
               ))
           : ThemeData(
+              pageTransitionsTheme: const PageTransitionsTheme(
+                  builders: <TargetPlatform, PageTransitionsBuilder>{
+                    TargetPlatform.android: FadeUpwardsPageTransitionsBuilder()
+                  }),
+              textSelectionTheme:
+                  const TextSelectionThemeData(cursorColor: Color(0xff141118)),
               brightness: Brightness.light,
               appBarTheme: const AppBarTheme(
                   elevation: 0,
