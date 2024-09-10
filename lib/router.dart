@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:songbookapp/Screens/download_screen.dart';
 import 'package:songbookapp/Screens/home_page.dart';
-import 'package:songbookapp/Screens/Lyrics.dart';
+import 'package:songbookapp/Screens/lyrics.dart';
 import 'package:songbookapp/Screens/song_list.dart';
 import 'package:songbookapp/Screens/index_screen.dart';
 import 'package:songbookapp/Screens/special_list.dart';

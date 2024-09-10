@@ -70,7 +70,7 @@ class Indexscreen extends StatelessWidget {
                     : const Color(0xAADAE0E2),
                 child: Center(
                   child: Text(
-                    "${hindiAlphabets[index]}",
+                    hindiAlphabets[index],
                     style: const TextStyle(
                         fontSize: 25, fontWeight: FontWeight.w400),
                   ),

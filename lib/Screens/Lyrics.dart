@@ -108,7 +108,7 @@ class LyricsScreen extends StatelessWidget {
                   builder: (context, myPlayerNotifier, child) {
                 return Container(
                   child: (myPlayerNotifier.isControllerReady)
-                      ? Container(
+                      ? SizedBox(
                           height: 150,
                           child: Column(
                             children: [
@@ -130,7 +130,7 @@ class LyricsScreen extends StatelessWidget {
                                       )),
                                   IconButton(
                                     icon: (myPlayerNotifier.loading)
-                                        ? Container(
+                                        ? SizedBox(
                                             height: 45,
                                             child: Center(
                                               child: CircularProgressIndicator(
@@ -213,12 +213,18 @@ class LyricsScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "${myPlayerNotifier.position.toString().split(".")[0].substring(2)}",
+                                      myPlayerNotifier.position
+                                          .toString()
+                                          .split(".")[0]
+                                          .substring(2),
                                       style: const TextStyle(
                                           fontWeight: FontWeight.w500),
                                     ),
                                     Text(
-                                      "${myPlayerNotifier.duration.toString().split(".")[0].substring(2)}",
+                                      myPlayerNotifier.duration
+                                          .toString()
+                                          .split(".")[0]
+                                          .substring(2),
                                       style: const TextStyle(
                                           fontWeight: FontWeight.w500),
                                     ),
@@ -229,7 +235,7 @@ class LyricsScreen extends StatelessWidget {
                               Flexible(
                                 child: Opacity(
                                   opacity: 0,
-                                  child: Container(
+                                  child: SizedBox(
                                     height: 0,
                                     width: 0,
                                     child: YoutubePlayer(
