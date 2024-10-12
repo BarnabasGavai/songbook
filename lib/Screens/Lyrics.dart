@@ -97,6 +97,7 @@ class LyricsScreen extends StatelessWidget {
                                   myPlayerNotifier.play();
                                   Future.delayed(const Duration(seconds: 1),
                                       () {
+                                    myPlayerNotifier.play();
                                     myPlayerNotifier.setLoading(false);
                                   });
                                 }).then((w) {
