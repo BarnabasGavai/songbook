@@ -5,6 +5,7 @@ import 'package:songbookapp/logic/firestore_service.dart';
 import 'package:songbookapp/logic/hive_service_provider.dart';
 
 import 'package:songbookapp/logic/model_theme.dart';
+import 'package:songbookapp/logic/wakelock_provider.dart';
 
 class SongListScreen extends StatelessWidget {
   const SongListScreen({super.key});
@@ -53,6 +54,15 @@ class SongListScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return InkWell(
                       child: Container(
+                        color: themeNotifier.isDark
+                            ? (index % 2 == 0)
+                                ? const Color(0xFF1C1A22)
+                                : const Color(0xFF2A272E)
+                            : (index % 2 == 0)
+                                ? const Color(0xFFF7F7F7)
+                                : const Color(0xFFEFEFEF),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 4, vertical: 4),
                         height: 60,
                         padding: const EdgeInsets.fromLTRB(17, 10, 17, 10),
                         child: Row(
@@ -90,6 +100,8 @@ class SongListScreen extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
+                        Provider.of<WakelockProvider>(context, listen: false)
+                            .enableWakelock();
                         if (data[index]['hasYoutube']) {
                           Navigator.pushNamed(context, '/lyrics', arguments: {
                             "fromdownloads": false,

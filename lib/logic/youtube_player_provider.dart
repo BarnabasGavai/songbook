@@ -55,6 +55,10 @@ class YoutubePlayerProvider with ChangeNotifier {
         pause();
         _ended = true;
       }
+      if (!_controller.value.isPlaying && isPlaying) {
+        pause();
+        _controller.pause();
+      }
       notifyListeners();
     }
   }

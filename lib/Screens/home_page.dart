@@ -64,6 +64,7 @@ class Home extends StatelessWidget {
                       height: 30,
                     ),
                     Container(
+                      width: 350,
                       padding: const EdgeInsets.symmetric(horizontal: 25),
                       child: const Text(
                         "Make a joyful noise unto the Lord, all ye lands. Serve the Lord with gladness: come before his presence with singing.\n Psalm 100: 1-2",
@@ -86,7 +87,9 @@ class Home extends StatelessWidget {
                         ),
                       ),
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.8,
+                        width: MediaQuery.of(context).size.width <= 550
+                            ? MediaQuery.of(context).size.width * 0.8
+                            : 400,
                         height: 45,
                         decoration: BoxDecoration(
                             border: Border.all(
@@ -113,7 +116,9 @@ class Home extends StatelessWidget {
                     ),
                     Container(
                       height: 40,
-                      width: MediaQuery.of(context).size.width * 0.75,
+                      width: MediaQuery.of(context).size.width <= 550
+                          ? MediaQuery.of(context).size.width * 0.8
+                          : 400,
                       margin: const EdgeInsets.symmetric(horizontal: 30),
                       decoration: BoxDecoration(
                           border: Border.all(
@@ -141,7 +146,9 @@ class Home extends StatelessWidget {
                     ),
                     Container(
                       height: 40,
-                      width: MediaQuery.of(context).size.width * 0.75,
+                      width: MediaQuery.of(context).size.width <= 550
+                          ? MediaQuery.of(context).size.width * 0.8
+                          : 400,
                       margin: const EdgeInsets.symmetric(horizontal: 30),
                       decoration: BoxDecoration(
                           border: Border.all(

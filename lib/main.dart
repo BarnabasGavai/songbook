@@ -12,6 +12,7 @@ import 'package:songbookapp/logic/search_provider.dart';
 import 'package:songbookapp/logic/connectivity_service.dart';
 import 'package:songbookapp/logic/model_theme.dart';
 import 'package:songbookapp/logic/autocomplete_service.dart';
+import 'package:songbookapp/logic/wakelock_provider.dart';
 import 'package:songbookapp/logic/youtube_player_provider.dart';
 import 'package:songbookapp/router.dart';
 
@@ -33,6 +34,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => YoutubePlayerProvider()),
+        ChangeNotifierProvider(create: (_) => WakelockProvider()),
         ChangeNotifierProvider(
             create: (_) => HiveService(mybox: mybox), lazy: false),
         ChangeNotifierProvider(
@@ -68,42 +70,96 @@ class MyApp extends StatelessWidget {
           ? ThemeData(
               pageTransitionsTheme: const PageTransitionsTheme(
                   builders: <TargetPlatform, PageTransitionsBuilder>{
-                    TargetPlatform.android: FadeUpwardsPageTransitionsBuilder()
+                    TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
                   }),
-              textSelectionTheme:
-                  const TextSelectionThemeData(cursorColor: Color(0xfffef7ff)),
+              textSelectionTheme: const TextSelectionThemeData(
+                cursorColor:
+                    Color(0xFFFAFAFA), // Slightly off-white for dark mode
+              ),
               brightness: Brightness.dark,
+              scaffoldBackgroundColor: const Color(
+                  0xFF141118), // Main background color for dark mode
               appBarTheme: const AppBarTheme(
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  systemOverlayStyle: SystemUiOverlayStyle(
-                      statusBarColor: Colors.transparent,
-                      statusBarIconBrightness: Brightness.light,
-                      systemNavigationBarColor: Color(0xff141118),
-                      systemNavigationBarIconBrightness: Brightness.light)),
+                elevation: 0, // Ensures no elevation
+                scrolledUnderElevation: 0, // Prevents shadow during scrolling
+                backgroundColor:
+                    Colors.transparent, // Keeps AppBar transparent in dark mode
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.transparent,
+                  statusBarIconBrightness:
+                      Brightness.light, // Light status bar icons for dark mode
+                  systemNavigationBarColor: Color(0xFF141118),
+                  systemNavigationBarIconBrightness: Brightness.light,
+                ),
+                foregroundColor: Color(
+                    0xFFFAFAFA), // AppBar icon and text color for dark mode
+              ),
               floatingActionButtonTheme: const FloatingActionButtonThemeData(
-                backgroundColor: Color(0xff141118),
-                foregroundColor: Color(0xfffef7ff),
-              ))
+                backgroundColor:
+                    Color(0xFF2F2C33), // Slightly lighter gray for contrast
+                foregroundColor: Color(0xFFFAFAFA), // Off-white for icons
+              ),
+              cardColor: const Color(
+                  0xFF2A272E), // Background color for list items in dark mode
+              dividerColor:
+                  const Color(0xFF1C191F), // Subtle divider for separation
+              textTheme: const TextTheme(
+                bodyLarge: TextStyle(
+                    color: Color(0xFFFAFAFA)), // Light text on dark background
+                bodyMedium: TextStyle(color: Color(0xFFFAFAFA)),
+              ),
+              colorScheme: const ColorScheme.dark(
+                primary: Colors
+                    .transparent, // Ensures no violet or other color overlays
+              ),
+            )
           : ThemeData(
               pageTransitionsTheme: const PageTransitionsTheme(
                   builders: <TargetPlatform, PageTransitionsBuilder>{
-                    TargetPlatform.android: FadeUpwardsPageTransitionsBuilder()
+                    TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
                   }),
-              textSelectionTheme:
-                  const TextSelectionThemeData(cursorColor: Color(0xff141118)),
+              textSelectionTheme: const TextSelectionThemeData(
+                cursorColor: Color(0xFF141118), // Dark cursor for light mode
+              ),
               brightness: Brightness.light,
+              scaffoldBackgroundColor:
+                  const Color(0xFFFDFDFD), // Slightly off-white for light mode
               appBarTheme: const AppBarTheme(
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  systemOverlayStyle: SystemUiOverlayStyle(
-                      statusBarColor: Colors.transparent,
-                      statusBarIconBrightness: Brightness.dark,
-                      systemNavigationBarColor: Color(0xfffef7ff),
-                      systemNavigationBarIconBrightness: Brightness.dark)),
+                elevation: 0, // Prevents any shadow or elevation when scrolling
+                scrolledUnderElevation: 0, // Removes shadow during scroll
+                backgroundColor:
+                    Colors.transparent, // Keeps the AppBar transparent
+                systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.transparent,
+                  statusBarIconBrightness:
+                      Brightness.dark, // Dark status bar icons for light mode
+                  systemNavigationBarColor:
+                      Color(0xFFFDFDFD), // Matches scaffold background
+                  systemNavigationBarIconBrightness: Brightness.dark,
+                ),
+                foregroundColor: Color(
+                    0xFF141118), // AppBar icon and text color for light mode
+              ),
               floatingActionButtonTheme: const FloatingActionButtonThemeData(
-                  backgroundColor: Color(0xfffef7ff),
-                  foregroundColor: Color(0xff141118))),
+                backgroundColor:
+                    Color(0xFFEDEDED), // Slightly darker gray for contrast
+                foregroundColor:
+                    Color(0xFF141118), // Dark icons for floating button
+              ),
+              cardColor: const Color(
+                  0xFFEDEDED), // Light gray background for list items in light mode
+              dividerColor:
+                  const Color(0xFFF5F5F5), // Subtle divider for separation
+              textTheme: const TextTheme(
+                bodyLarge: TextStyle(
+                    color: Color(0xFF141118)), // Dark text on light background
+                bodyMedium: TextStyle(color: Color(0xFF141118)),
+              ),
+              colorScheme: const ColorScheme.light(
+                primary:
+                    Colors.transparent, // Ensures no violet or other overlays
+              ),
+            ),
       onGenerateRoute: _appRoute.onGenerateRoute,
     );
   }

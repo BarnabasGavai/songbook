@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:songbookapp/logic/hive_service_provider.dart';
 
 import 'package:songbookapp/logic/model_theme.dart';
+import 'package:songbookapp/logic/wakelock_provider.dart';
 
 class DownloadScreen extends StatelessWidget {
   const DownloadScreen({super.key});
@@ -46,6 +47,15 @@ class DownloadScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return InkWell(
                       child: Container(
+                        color: themeNotifier.isDark
+                            ? (index % 2 == 0)
+                                ? const Color(0xFF1C1A22)
+                                : const Color(0xFF2A272E)
+                            : (index % 2 == 0)
+                                ? const Color(0xFFF7F7F7)
+                                : const Color(0xFFEFEFEF),
+                        margin: const EdgeInsets.symmetric(
+                            horizontal: 4, vertical: 4),
                         height: 60,
                         padding: const EdgeInsets.fromLTRB(17, 10, 17, 10),
                         child: Row(
@@ -80,6 +90,9 @@ class DownloadScreen extends StatelessWidget {
                         ),
                       ),
                       onTap: () {
+                        Provider.of<WakelockProvider>(context, listen: false)
+                            .enableWakelock();
+
                         Navigator.pushNamed(context, '/lyrics', arguments: {
                           "fromdownloads": true,
                           "mysong": myData[index],
