@@ -1,0 +1,7 @@
+platform :ios, '13.0'
+
+# Add other pods if necessary
+target 'Runner' do
+  use_frameworks!
+  flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
+end
