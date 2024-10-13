@@ -120,32 +120,37 @@ class LyricsScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: PinchScale(
-                        baseValue: baseTextSizeValue,
-                        currentValue: () => fontSize.value,
-                        onValueChanged: (double newFontSize) =>
-                            fontSize.value = newFontSize,
-                        child: ValueListenableBuilder<double>(
-                          valueListenable: fontSize,
-                          builder: (context, fontSize, child) {
-                            return Container(
-                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      """${mysong['song']}""",
-                                      style: TextStyle(
-                                        fontSize: fontSize,
-                                        fontWeight: FontWeight.w500,
+                      child: Center(
+                        child: PinchScale(
+                          baseValue: baseTextSizeValue,
+                          currentValue: () => fontSize.value,
+                          onValueChanged: (double newFontSize) =>
+                              fontSize.value = newFontSize,
+                          child: ValueListenableBuilder<double>(
+                            valueListenable: fontSize,
+                            builder: (context, fontSize, child) {
+                              return Container(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        """${mysong['song']}""",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontSize: fontSize,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
                       ),
                     ),
@@ -603,6 +608,9 @@ class LyricsScreen extends StatelessWidget {
                                   ),
                       );
                     }),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Flexible(
                       child: PinchScale(
                         baseValue: baseTextSizeValue,
