@@ -1,7 +1,13 @@
+# Uncomment the next line to define a global platform for your project
 platform :ios, '13.0'
 
-# Add other pods if necessary
+# CocoaPods analytics sends network stats synchronously affecting performance.
+# Disable these by uncommenting the next line.
+# use_frameworks!
+
+# The target for your Flutter app
 target 'Runner' do
-  use_frameworks!
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
 end
+
+# Add other pods below
