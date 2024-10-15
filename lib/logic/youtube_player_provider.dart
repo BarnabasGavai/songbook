@@ -23,11 +23,13 @@ class YoutubePlayerProvider with ChangeNotifier {
     _isControllerReady = true;
 
     _controller = YoutubePlayerController(
-      initialVideoId: YoutubePlayer.convertUrlToId(videoUrl)!,
+      initialVideoId: videoUrl,
       flags: const YoutubePlayerFlags(
         autoPlay: false,
+        hideThumbnail: true,
         mute: false,
         forceHD: false,
+        hideControls: true,
         enableCaption: false,
       ),
     )..addListener(_controllerListener);

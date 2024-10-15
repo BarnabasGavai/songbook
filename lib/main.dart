@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:songbookapp/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:songbookapp/logic/autoplay_provider.dart';
 import 'package:songbookapp/logic/firestore_service.dart';
 import 'package:songbookapp/logic/hive_service_provider.dart';
 import 'package:songbookapp/logic/search_provider.dart';
@@ -33,6 +34,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => AutoplayProvider()),
         ChangeNotifierProvider(create: (_) => YoutubePlayerProvider()),
         ChangeNotifierProvider(create: (_) => WakelockProvider()),
         ChangeNotifierProvider(

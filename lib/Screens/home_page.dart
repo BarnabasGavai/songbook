@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:songbookapp/Screens/NonStop_controller.dart';
 import 'package:songbookapp/Screens/download_screen.dart';
 import 'package:songbookapp/Screens/searching_screen.dart';
+import 'package:songbookapp/Screens/song_list.dart';
 import 'package:songbookapp/logic/firestore_service.dart';
 
 import 'package:songbookapp/logic/connectivity_service.dart';
 
 import 'package:songbookapp/logic/model_theme.dart';
 import 'package:songbookapp/logic/autocomplete_service.dart';
+import 'package:songbookapp/logic/wakelock_provider.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -176,10 +179,21 @@ class Home extends StatelessWidget {
                 ),
               ),
             ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                 Provider.of<WakelockProvider>(context, listen: false)
+                            .enableWakelock();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => NonstopController()));
+              },
+              child: Icon(Icons.headphones),
+            ),
           ),
         );
       } else {
-        return const Scaffold(
+        return Scaffold(
           body: Center(
             child: DownloadScreen(),
           ),
