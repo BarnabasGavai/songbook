@@ -6,7 +6,6 @@ import 'package:songbookapp/logic/firestore_service.dart';
 import 'package:songbookapp/logic/hive_service_provider.dart';
 import 'package:songbookapp/logic/model_theme.dart';
 import 'package:flutter/services.dart';
-import 'package:songbookapp/logic/wakelock_provider.dart';
 
 class NonstopPlayer extends StatelessWidget {
   final Map<dynamic, dynamic> mysong;

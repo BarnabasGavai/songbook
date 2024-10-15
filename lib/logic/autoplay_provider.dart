@@ -25,7 +25,7 @@ class AutoplayProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void dispose_controller() {
+  void disposeController() {
     _isControllerReady = false;
     _controller.reset();
     _controller.reload();

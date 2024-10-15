@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:songbookapp/Screens/NonStop_controller.dart';
 import 'package:songbookapp/Screens/download_screen.dart';
 import 'package:songbookapp/Screens/searching_screen.dart';
-import 'package:songbookapp/Screens/song_list.dart';
+
 import 'package:songbookapp/logic/firestore_service.dart';
 
 import 'package:songbookapp/logic/connectivity_service.dart';
@@ -181,19 +181,19 @@ class Home extends StatelessWidget {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                 Provider.of<WakelockProvider>(context, listen: false)
-                            .enableWakelock();
+                Provider.of<WakelockProvider>(context, listen: false)
+                    .enableWakelock();
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => NonstopController()));
+                        builder: (context) => const NonstopController()));
               },
-              child: Icon(Icons.headphones),
+              child: const Icon(Icons.headphones),
             ),
           ),
         );
       } else {
-        return Scaffold(
+        return const Scaffold(
           body: Center(
             child: DownloadScreen(),
           ),

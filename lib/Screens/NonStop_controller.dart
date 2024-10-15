@@ -18,7 +18,9 @@ class NonstopController extends StatefulWidget {
 
 class _NonstopControllerState extends State<NonstopController> {
   bool myLoading = false; // Renamed for clarity
+  // ignore: prefer_typing_uninitialized_variables
   late final autoplayercontroller;
+  // ignore: prefer_typing_uninitialized_variables
   late final firestorenotifier;
   List _ids = [];
   int choose = 0;
@@ -84,7 +86,7 @@ class _NonstopControllerState extends State<NonstopController> {
     return PopScope(
       onPopInvoked: (didPop) {
         autoplayercontroller
-            .dispose_controller(); // Dispose of the old controller when navigating back
+            .disposeController(); // Dispose of the old controller when navigating back
         Provider.of<WakelockProvider>(context, listen: false).disableWakelock();
       },
       child: Consumer4<ModelTheme, HiveService, AutoplayProvider,
@@ -98,7 +100,7 @@ class _NonstopControllerState extends State<NonstopController> {
           body: Stack(
             children: [
               if (myPlayerNotifier.isControllerReady)
-                Container(
+                SizedBox(
                   height: 0,
                   width: 0,
                   child: Opacity(
@@ -117,7 +119,9 @@ class _NonstopControllerState extends State<NonstopController> {
                             try {
                               for_next_song();
                               problem = false;
-                            } catch (e) {}
+                            } catch (e) {
+                              //m
+                            }
                           }
                         },
                       ),
@@ -125,7 +129,7 @@ class _NonstopControllerState extends State<NonstopController> {
                   ),
                 )
               else
-                SizedBox(height: 0, width: 0),
+                const SizedBox(height: 0, width: 0),
               player
             ],
           ),
