@@ -75,39 +75,41 @@ class NonstopPlayer extends StatelessWidget {
           ],
         ),
         body: (MediaQuery.of(context).size.width > 550)
-            ? Container(
-                child: SingleChildScrollView(
-                  child: Center(
-                    child: PinchScale(
-                      baseValue: baseTextSizeValue,
-                      currentValue: () => fontSize.value,
-                      onValueChanged: (double newFontSize) =>
-                          fontSize.value = newFontSize,
-                      child: ValueListenableBuilder<double>(
-                        valueListenable: fontSize,
-                        builder: (context, fontSize, child) {
-                          return Container(
-                            child: Text(
-                              """${mysong['song']}""",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                fontSize: fontSize,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                          );
-                        },
+            ? Column(
+                children: [
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Center(
+                        child: PinchScale(
+                          baseValue: baseTextSizeValue,
+                          currentValue: () => fontSize.value,
+                          onValueChanged: (double newFontSize) =>
+                              fontSize.value = newFontSize,
+                          child: ValueListenableBuilder<double>(
+                            valueListenable: fontSize,
+                            builder: (context, fontSize, child) {
+                              return Container(
+                                width: double.maxFinite,
+                                child: Text(
+                                  """${mysong['song']}""",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: fontSize,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
                       ),
                     ),
                   ),
-                ),
+                ],
               )
             : Column(
                 children: [
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Flexible(
+                  Expanded(
                     child: PinchScale(
                       baseValue: baseTextSizeValue,
                       currentValue: () => fontSize.value,
@@ -122,6 +124,9 @@ class NonstopPlayer extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                  SizedBox(
+                                    height: 15,
+                                  ),
                                   Center(
                                     child: Text(
                                       "${mysong['title']}",

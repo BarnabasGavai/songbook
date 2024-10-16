@@ -117,44 +117,36 @@ class LyricsScreen extends StatelessWidget {
           ),
           body: (MediaQuery.of(context).size.width > 550)
               ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Expanded(
-                      child: Center(
-                        child: PinchScale(
-                          baseValue: baseTextSizeValue,
-                          currentValue: () => fontSize.value,
-                          onValueChanged: (double newFontSize) =>
-                              fontSize.value = newFontSize,
-                          child: ValueListenableBuilder<double>(
-                            valueListenable: fontSize,
-                            builder: (context, fontSize, child) {
-                              return Container(
-                                padding:
-                                    const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        """${mysong['song']}""",
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontSize: fontSize,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ],
+                      child: SingleChildScrollView(
+                        child: Center(
+                          child: PinchScale(
+                            baseValue: baseTextSizeValue,
+                            currentValue: () => fontSize.value,
+                            onValueChanged: (double newFontSize) =>
+                                fontSize.value = newFontSize,
+                            child: ValueListenableBuilder<double>(
+                              valueListenable: fontSize,
+                              builder: (context, fontSize, child) {
+                                return Container(
+                                  width: double.maxFinite,
+                                  child: Text(
+                                    """${mysong['song']}""",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: fontSize,
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
-                                ),
-                              );
-                            },
+                                );
+                              },
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(
+                    Container(
                       width: (Provider.of<YoutubePlayerProvider>(context)
                               .isControllerReady)
                           ? MediaQuery.of(context).size.width * 0.5
@@ -608,10 +600,7 @@ class LyricsScreen extends StatelessWidget {
                                   ),
                       );
                     }),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Flexible(
+                    Expanded(
                       child: PinchScale(
                         baseValue: baseTextSizeValue,
                         currentValue: () => fontSize.value,
@@ -626,6 +615,9 @@ class LyricsScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
                                     Center(
                                       child: Text(
                                         "${mysong['title']}",
