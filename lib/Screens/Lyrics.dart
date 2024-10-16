@@ -119,17 +119,17 @@ class LyricsScreen extends StatelessWidget {
               ? Row(
                   children: [
                     Expanded(
-                      child: SingleChildScrollView(
-                        child: Center(
-                          child: PinchScale(
-                            baseValue: baseTextSizeValue,
-                            currentValue: () => fontSize.value,
-                            onValueChanged: (double newFontSize) =>
-                                fontSize.value = newFontSize,
-                            child: ValueListenableBuilder<double>(
-                              valueListenable: fontSize,
-                              builder: (context, fontSize, child) {
-                                return Container(
+                      child: Center(
+                        child: PinchScale(
+                          baseValue: baseTextSizeValue,
+                          currentValue: () => fontSize.value,
+                          onValueChanged: (double newFontSize) =>
+                              fontSize.value = newFontSize,
+                          child: ValueListenableBuilder<double>(
+                            valueListenable: fontSize,
+                            builder: (context, fontSize, child) {
+                              return SingleChildScrollView(
+                                child: SizedBox(
                                   width: double.maxFinite,
                                   child: Text(
                                     """${mysong['song']}""",
@@ -139,14 +139,14 @@ class LyricsScreen extends StatelessWidget {
                                       fontWeight: FontWeight.w500,
                                     ),
                                   ),
-                                );
-                              },
-                            ),
+                                ),
+                              );
+                            },
                           ),
                         ),
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       width: (Provider.of<YoutubePlayerProvider>(context)
                               .isControllerReady)
                           ? MediaQuery.of(context).size.width * 0.5
