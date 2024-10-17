@@ -22,7 +22,7 @@ class _NonstopControllerState extends State<NonstopController> {
   late final autoplayercontroller;
   // ignore: prefer_typing_uninitialized_variables
   late final firestorenotifier;
-  List _ids = [];
+  final List _ids = [];
   int choose = -1;
   void choosing() {
     bool check = true;
@@ -129,7 +129,7 @@ class _NonstopControllerState extends State<NonstopController> {
             ),
           ),
         );
-        Widget player = SizedBox(height: 0, width: 0);
+        Widget player = const SizedBox(height: 0, width: 0);
         if (myPlayerNotifier.isControllerReady || choose != -1) {
           player = NonstopPlayer(
               mysong: firestoreNotifier.data[choose], fromdownloads: false);

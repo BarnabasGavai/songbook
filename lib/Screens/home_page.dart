@@ -54,128 +54,131 @@ class Home extends StatelessWidget {
             ),
             body: Center(
               child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text(
-                      "Praise the Lord!",
-                      textAlign: TextAlign.center,
-                      style:
-                          TextStyle(fontSize: 33, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                    Container(
-                      width: 350,
-                      padding: const EdgeInsets.symmetric(horizontal: 25),
-                      child: const Text(
-                        "Make a joyful noise unto the Lord, all ye lands. Serve the Lord with gladness: come before his presence with singing.\n Psalm 100: 1-2",
+                child: SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      const Text(
+                        "Praise the Lord!",
                         textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 15),
+                        style: TextStyle(
+                            fontSize: 33, fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                                  const Searchingscreen(),
-                          transitionDuration: Duration.zero,
-                          reverseTransitionDuration: Duration.zero,
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      Container(
+                        width: 350,
+                        padding: const EdgeInsets.symmetric(horizontal: 25),
+                        child: const Text(
+                          "Make a joyful noise unto the Lord, all ye lands. Serve the Lord with gladness: come before his presence with singing.\n Psalm 100: 1-2",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 15),
                         ),
                       ),
-                      child: Container(
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            pageBuilder:
+                                (context, animation, secondaryAnimation) =>
+                                    const Searchingscreen(),
+                            transitionDuration: Duration.zero,
+                            reverseTransitionDuration: Duration.zero,
+                          ),
+                        ),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width <= 550
+                              ? MediaQuery.of(context).size.width * 0.8
+                              : 400,
+                          height: 45,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 1,
+                                color: (themeNotifier.isDark)
+                                    ? Colors.white
+                                    : Colors.black,
+                              ),
+                              borderRadius: BorderRadius.circular(20)),
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: const Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Search the song here"),
+                                Icon(Icons.search)
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Container(
+                        height: 40,
                         width: MediaQuery.of(context).size.width <= 550
                             ? MediaQuery.of(context).size.width * 0.8
                             : 400,
-                        height: 45,
+                        margin: const EdgeInsets.symmetric(horizontal: 30),
                         decoration: BoxDecoration(
                             border: Border.all(
-                              width: 1,
-                              color: (themeNotifier.isDark)
-                                  ? Colors.white
-                                  : Colors.black,
+                                color: (themeNotifier.isDark)
+                                    ? Colors.white
+                                    : Colors.black),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(15))),
+                        child: InkWell(
+                          onTap: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            Navigator.pushNamed(context, '/index');
+                          },
+                          child: const Center(
+                            child: Text(
+                              "Letter Index",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16.4),
                             ),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Search the song here"),
-                              Icon(Icons.search)
-                            ],
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Container(
-                      height: 40,
-                      width: MediaQuery.of(context).size.width <= 550
-                          ? MediaQuery.of(context).size.width * 0.8
-                          : 400,
-                      margin: const EdgeInsets.symmetric(horizontal: 30),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: (themeNotifier.isDark)
-                                  ? Colors.white
-                                  : Colors.black),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(15))),
-                      child: InkWell(
-                        onTap: () {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          Navigator.pushNamed(context, '/index');
-                        },
-                        child: const Center(
-                          child: Text(
-                            "Letter Index",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16.4),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Container(
+                        height: 40,
+                        width: MediaQuery.of(context).size.width <= 550
+                            ? MediaQuery.of(context).size.width * 0.8
+                            : 400,
+                        margin: const EdgeInsets.symmetric(horizontal: 30),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: (themeNotifier.isDark)
+                                    ? Colors.white
+                                    : Colors.black),
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(15))),
+                        child: InkWell(
+                          onTap: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            Navigator.pushNamed(context, '/list');
+                          },
+                          child: const Center(
+                            child: Text(
+                              "All Songs",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 16.4),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    Container(
-                      height: 40,
-                      width: MediaQuery.of(context).size.width <= 550
-                          ? MediaQuery.of(context).size.width * 0.8
-                          : 400,
-                      margin: const EdgeInsets.symmetric(horizontal: 30),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: (themeNotifier.isDark)
-                                  ? Colors.white
-                                  : Colors.black),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(15))),
-                      child: InkWell(
-                        onTap: () {
-                          FocusManager.instance.primaryFocus?.unfocus();
-                          Navigator.pushNamed(context, '/list');
-                        },
-                        child: const Center(
-                          child: Text(
-                            "All Songs",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16.4),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 40)
-                  ],
+                      const SizedBox(height: 40)
+                    ],
+                  ),
                 ),
               ),
             ),
