@@ -2,20 +2,27 @@
 
 ## Android Worship Music Application (Flutter)
 
-Hindi Christian Songbook is an Android application designed to provide easy access to Hindi Christian hymns with integrated music playback, offline access, and a distraction-free worship experience.
+Hindi Christian Songbook is a Flutter-based Android application designed to provide easy access to Hindi Christian hymns with integrated music playback, offline access, and a clean distraction-free worship experience.
 
-The application focuses on usability, offline accessibility, and seamless music playback for churches and personal worship.
+The app focuses on usability, offline accessibility, and seamless playback for both personal worship and church environments.
 
-Amazon App Link:
+## Live Store Listing
+
+Amazon Appstore:
 https://www.amazon.in/Barnabas-Christian-Hindi-Songbook/dp/B0DCP4TQWJ
+
+## APK Download
+
+Direct APK:
+https://drive.google.com/file/d/1ftScdhUiopTROPW6WBNrpgA7_wETHpHK/view?usp=sharing
 
 ---
 
 ## Overview
 
-This application allows users to browse Hindi Christian songs, read lyrics, listen to music, and access content even without internet connectivity. The app is designed to be simple, fast, and usable during worship sessions.
+The application allows users to browse Hindi Christian songs, read lyrics, listen to music, and access saved content offline. The system is designed using an offline-first approach to ensure reliability even with limited internet access.
 
-The project demonstrates mobile development, local storage optimization, offline-first design, and clean UI implementation using Flutter.
+This project demonstrates mobile application development, state management, offline storage strategies, and cloud data synchronization using Flutter.
 
 ---
 
@@ -25,36 +32,36 @@ The project demonstrates mobile development, local storage optimization, offline
 
 • Built-in audio player  
 • Continuous playback support  
-• Random song playback option  
+• Random song playback feature  
 • Lyrics displayed alongside music  
+
+### Nonstop Worship Mode
+
+• Radio-style continuous playback  
+• Automatic random song transitions  
+• Automatic lyric updates  
+• Screen remains active during playback  
 
 ### Offline Support
 
-• Songs available without internet  
-• Local storage using Hive  
-• Fast local data access  
+• Songs accessible without internet  
+• Local caching using Hive  
+• Fast local data retrieval  
 • Reduced network dependency  
 
 ### Song Navigation
 
 • Letter-based indexing  
 • Search functionality  
-• Quick navigation between songs  
+• Fast navigation between songs  
 
 ### User Experience Features
 
 • Dark mode support  
-• Adjustable font sizes  
-• Landscape optimization  
-• Wide-screen support  
-• Screen stays active during playback  
-
-### Nonstop Worship Mode
-
-• Radio-style continuous playback  
-• Automatic song transitions  
-• Lyrics update automatically  
-• Designed for uninterrupted worship sessions  
+• Adjustable font size  
+• Landscape support  
+• Wide screen optimization  
+• Clean and simple UI  
 
 ---
 
@@ -66,14 +73,14 @@ The project demonstrates mobile development, local storage optimization, offline
 ### State Management
 - Provider
 
-### Database
-- Firebase (cloud storage)
-- Hive (local storage)
+### Database & Storage
+- Firebase (Cloud data)
+- Hive (Local storage)
 
-### Architecture
-- Offline-first design approach
+### Architecture Concepts
+- Offline-first design
 - Local caching strategy
-- Clean UI component structure
+- Responsive UI design
 
 ---
 
@@ -81,35 +88,35 @@ The project demonstrates mobile development, local storage optimization, offline
 
 Application flow:
 
-User opens app  
-→ Song list loads  
-→ Data fetched from local storage  
-→ Firebase sync (if needed)  
+App launch  
+→ Load songs from local storage  
+→ Sync data from Firebase (if available)  
 → User selects song  
 → Audio playback starts  
 → Lyrics displayed  
+→ Continuous playback option available  
 
 ---
 
 ## Engineering Challenges Solved
 
-Some technical problems addressed:
+Key technical problems addressed:
 
-• Implementing offline-first data architecture  
-• Designing smooth audio playback flow  
-• Managing local caching with Hive  
-• Handling UI responsiveness across screen sizes  
-• Implementing efficient search functionality  
+• Designing offline-first mobile architecture  
+• Implementing smooth audio playback flow  
+• Managing local caching using Hive  
+• Ensuring UI responsiveness across devices  
+• Implementing fast search functionality  
 
 ---
 
-## Key Design Decisions
+## Design Decisions
 
-Important engineering decisions:
+Important architectural decisions:
 
-• Use Hive for fast local storage  
-• Use Firebase for data management  
-• Provider for predictable state handling  
+• Use Hive for fast offline storage  
+• Use Firebase for centralized data management  
+• Provider for predictable state management  
 • Offline-first architecture for reliability  
 • Simple UI for accessibility during worship  
 
@@ -117,22 +124,23 @@ Important engineering decisions:
 
 ## Screenshots
 
-(Add screenshots here if you want later)
+### Song List
+![Song List](https://m.media-amazon.com/images/I/61mavcJ6b1L.png)
 
-Example:
+### Lyrics View
+![Lyrics](https://m.media-amazon.com/images/I/61NoSkBO18L.png)
 
-Dashboard  
-Song list  
-Lyrics view  
-Music player  
+### Music Player
+![Player](https://m.media-amazon.com/images/I/718-JHHLIiL.png)
 
----
+### Navigation
+![Navigation](https://m.media-amazon.com/images/I/5170l7dGAmL.png)
 
-## APK Download
+### Dark Mode
+![Dark Mode](https://m.media-amazon.com/images/I/61bJ0tQSWxL.png)
 
-APK can be downloaded from Releases section.
-
-(Upload APK in GitHub Releases)
+### Search
+![Search](https://m.media-amazon.com/images/I/71PLK275TsL.png)
 
 ---
 
@@ -142,9 +150,9 @@ Potential enhancements:
 
 • Playlist creation  
 • Favorites system  
-• Song categories  
-• Performance improvements  
-• UI enhancements  
+• Song categorization  
+• UI improvements  
+• Performance optimizations  
 
 ---
 
@@ -158,8 +166,11 @@ https://github.com/BarnabasGavai
 LinkedIn:
 https://in.linkedin.com/in/barnabas-gavai01
 
+Email:
+barnabasgavai@gmail.com
+
 ---
 
 ## Notes
 
-This project demonstrates mobile application development using Flutter, state management, cloud integration, and offline data handling.
+This project demonstrates mobile development using Flutter, offline data handling, state management, and cloud integration.
