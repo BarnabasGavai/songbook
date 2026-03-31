@@ -124,24 +124,17 @@ Important architectural decisions:
 
 ## Screenshots
 
-### Song List
-![Song List](https://m.media-amazon.com/images/I/61mavcJ6b1L.png)
+<p align="center">
+  <img src="https://m.media-amazon.com/images/I/61mavcJ6b1L.png" width="200"/>
+  <img src="https://m.media-amazon.com/images/I/61NoSkBO18L.png" width="200"/>
+  <img src="https://m.media-amazon.com/images/I/718-JHHLIiL.png" width="200"/>
+</p>
 
-### Lyrics View
-![Lyrics](https://m.media-amazon.com/images/I/61NoSkBO18L.png)
-
-### Music Player
-![Player](https://m.media-amazon.com/images/I/718-JHHLIiL.png)
-
-### Navigation
-![Navigation](https://m.media-amazon.com/images/I/5170l7dGAmL.png)
-
-### Dark Mode
-![Dark Mode](https://m.media-amazon.com/images/I/61bJ0tQSWxL.png)
-
-### Search
-![Search](https://m.media-amazon.com/images/I/71PLK275TsL.png)
-
+<p align="center">
+  <img src="https://m.media-amazon.com/images/I/5170l7dGAmL.png" width="200"/>
+  <img src="https://m.media-amazon.com/images/I/61bJ0tQSWxL.png" width="200"/>
+  <img src="https://m.media-amazon.com/images/I/71PLK275TsL.png" width="200"/>
+</p>
 ---
 
 ## Possible Future Improvements
