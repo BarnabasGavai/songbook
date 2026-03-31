@@ -125,19 +125,15 @@ Important architectural decisions:
 ## Screenshots
 
 <p align="center">
-<b>Song List</b><br>
-<img src="https://m.media-amazon.com/images/I/61mavcJ6b1L.png" width="180"/>
+  <img src="https://m.media-amazon.com/images/I/61mavcJ6b1L.png" width="200"/>
+  <img src="https://m.media-amazon.com/images/I/61NoSkBO18L.png" width="200"/>
+  <img src="https://m.media-amazon.com/images/I/718-JHHLIiL.png" width="200"/>
 </p>
 
 <p align="center">
-<img src="https://m.media-amazon.com/images/I/61NoSkBO18L.png" width="180"/>
-<img src="https://m.media-amazon.com/images/I/718-JHHLIiL.png" width="180"/>
-<img src="https://m.media-amazon.com/images/I/5170l7dGAmL.png" width="180"/>
-</p>
+  <img src="https://m.media-amazon.com/images/I/5170l7dGAmL.png" width="200"/>
+  <img src="https://m.media-amazon.com/images/I/61bJ0tQSWxL.png" width="200"/>
 
-<p align="center">
-<img src="https://m.media-amazon.com/images/I/61bJ0tQSWxL.png" width="180"/>
-<img src="https://m.media-amazon.com/images/I/71PLK275TsL.png" width="180"/>
 </p>
 ---
 
